@@ -49,10 +49,10 @@ class VideoController extends Controller
             $miniature = $request->file('imagen');
         }
          * */
-
+        //dd($request->input('name'));
         $result = Video::create([
             'user_id' => Auth::id(),
-            'name' => $request->input('name'),
+            'title' => $request->input('name'),
             'description' => $request->input('description'),
             'path' => $request->file('file')->store('video', 'public'),
             'miniature' => $miniature

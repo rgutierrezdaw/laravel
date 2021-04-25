@@ -21,7 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role_id',
+        //'role_id',
     ];
 
     /**
@@ -52,6 +52,7 @@ class User extends Authenticatable
     }
 
     public function authorizeRoles($roles){
+
         if ($this->hasAnyRole($roles)){
             return true;
         }
@@ -61,9 +62,11 @@ class User extends Authenticatable
     public function hasAnyRole($roles){
         if(is_array($roles)){
             foreach ($roles as $role){
+
                 if($this->hasRole($role)){
                     return true;
                 }
+
             }
         } else {
             if($this->hasRole($roles)){

@@ -17,10 +17,8 @@
     </div>
     <div id="loader-wrapper">
         <div id="loader"></div>
-
         <div class="loader-section section-left"></div>
         <div class="loader-section section-right"></div>
-
     </div>
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
@@ -28,11 +26,30 @@
                 <i class="fas fa-bars"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                @if(Auth::user()->hasRole('loader'))
                 <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link nav-link-4" href="{{ route('addVideo') }}">Subir video</a>
                     </li>
                 </ul>
+                @elseif (Auth::user()->hasRole('admin'))
+                <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-4" href="{{ route('adminUsers') }}">Administración de usuarios</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-4" href="{{ route('adminVideos') }}">Administración de videos</a>
+                    </li>
+                </ul>
+                @elseif (Auth::user()->hasRole('guest') || Auth::user()->hasRole('user'))
+                <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-4" href="{{ route('profile') }}">Perfil</a>
+                    </li>
+                </ul>
+                @endif
             </div>
         </div>
         <div class="container-fluid">
@@ -40,11 +57,6 @@
                 <i class="fas fa-bars"></i>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link nav-link-4" href="{{ route('profile') }}">Perfil</a>
-                    </li>
-                </ul>
             </div>
         </div>
     </nav>
@@ -54,12 +66,7 @@
             <source src="video/hero.mp4" type="video/mp4">
         </video>
         <i id="tm-video-control-button" class="fas fa-pause"></i>
-        <form class="d-flex position-absolute tm-search-form">
-            <input class="form-control tm-search-input" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success tm-search-btn" type="submit">
-                <i class="fas fa-search"></i>
-            </button>
-        </form>
+
     </div>
     <div class="container-fluid tm-container-content tm-mt-60">
         <div class="row mb-4">
@@ -85,7 +92,7 @@
                         </figure>
                         <div class="d-flex justify-content-between tm-text-gray">
                             <span>{{$video->created_at}}</span>
-                            <span>Publicado por {{$video->userName}}</span>
+                            <span>Publicado por {{$video->name}}</span>
                         </div>
                     </div>
                 @endforeach

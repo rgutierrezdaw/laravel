@@ -51,7 +51,7 @@
                     </p>
                     <div class="mb-4 d-flex flex-wrap">
                         <div class="mr-4 mb-2">
-                            <span class="tm-text-gray-dark">Publicado por: </span><span class="tm-text-primary">{{$video->userName}}</span>
+                            <span class="tm-text-gray-dark">Publicado por: </span><span class="tm-text-primary">{{$video->name}}</span>
                         </div>
                         <div class="mr-4 mb-2">
                             <span class="tm-text-gray-dark">Subido el: </span><span class="tm-text-primary">{{$video->created_at}}</span>
